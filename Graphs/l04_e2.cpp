@@ -8,10 +8,15 @@
     
     using namespace std;
 
-    // SSSP , achar a menor distância de um ponto até outros em uma árvore
+    // Definir se é uma árvore
+    // para isto basta que ela tenha somente 1 componente conexo
+    // e que o num de arestas seja o num de vértices -1 
 
-    // Utiliza DFS com um vetor de distancia de um vertice escolhido
-    // entao utiliza uma variavel para somar 1 cada vez que vai para um vertice proximo na DFS
+    // as duas condições precisam ser feitas
+
+    // se somente a segunda condição fosse feita poderia ter um grafo
+    // com somente um vertice sem nenhuma arestas e 3 vertices com 3 arestas
+    // formando um ciclo, isto não é uma árvore mas tem num de arestas = num vertices - 1
 
     vector<int> g[10001], vis(10001, 0), dis(1001, 0);
 
