@@ -8,21 +8,19 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
  
 using namespace std;
 
-// Counting connected components, ptbr = Contando componentes conexos
+// SSSP , achar a menor distância de um ponto até outros em uma árvore
 
-// Just use DFS for each i which is not visited
-// when the graph is not direcional
+// Utiliza DFS com um vetor de distancia de um vertice escolhido
+// entao utiliza uma variavel para somar 1 cada vez que vai para um vertice proximo na DFS
 
-// Só usar DFS pra cada vertice i, como ele vai percorrer o grafo inteiro
-// Basta fazer uma variável que soma toda vez que chamar a dfs
+vector<int> g[1001], vis(1001, 0), dis(1001, 0);
 
-vector<int> g[1001], vis(1001, 0);
-
-void dfs(int v){
+void dfs(int v, int distance){
     vis[v] = 1;
+    dis[v] = distance;
     for(int child: g[v]){
         if (!vis[child]){
-            dfs(child);
+            dfs(child, distance + 1);
         }
     }
 }
@@ -32,7 +30,6 @@ int main(){_
     // M = num edges , ptbr = arestas
     int n, m ;
     cin>>n>>m;
-
     int cc_count = 0;
     
     while(m--){
@@ -42,11 +39,8 @@ int main(){_
         g[b].push_back(a);
     }
 
-    for(int i=1; i <= n;i++){
-        if(!vis[i]){
-            dfs(i);
-            cc_count += 1;
-        }
+    dfs(2, 0); // Aqui o vertice escolhido com distancia 0 de si mesmo
+    for(int i=1 ; i <= n; i++){
+        cout<<dis[i]<<" ";
     }
-    cout<<cc_count<<endl;
 }
